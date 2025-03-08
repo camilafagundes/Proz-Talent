@@ -1,0 +1,8 @@
+    Estamos modernizando nossa loja e precisamos de um novo controle de estoque.
+    Geralmente anotamos todos os produtos que temos disponíveis, e quando um dos 
+profutos acaba, substituímos ele por outro produto,
+ouvi dizer que vocês podem fazer um sistema para a gente que mostra a lista
+com todos nossos produtos, e nos deixa alterar um produto por outro.
+    Além disso, estamos pensando em ampliar nosso armazém, para ter mais espaço
+para mais produtos. Então, se puderem fazer com que o sistema nos permita adicionar 
+mais produtos a lista, e qualquer outra coisa que acharem necessário, seria muito bom.
