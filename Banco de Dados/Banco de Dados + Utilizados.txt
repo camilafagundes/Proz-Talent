@@ -1,0 +1,60 @@
+	Atualmente, os bancos de dados mais utilizados no mercado incluem:​
+
+Oracle Database: Amplamente adotado por grandes corporações devido à sua robustez e escalabilidade.
+
+MySQL: Popular em aplicações web e startups, conhecido por sua simplicidade e eficiência.
+
+Microsoft SQL Server: Preferido em ambientes corporativos que utilizam tecnologias Microsoft.
+
+PostgreSQL: Reconhecido por sua conformidade com padrões e extensibilidade.
+
+MongoDB: Um banco de dados NoSQL amplamente usado em aplicações que requerem flexibilidade no modelo de dados.​
+
+	A seguir, detalho dois desses bancos de dados:
+
+Oracle Database
+Tipo: Banco de dados relacional (RDBMS)
+
+Desenvolvedor: Oracle Corporation
+
+Destaques:
+
+Líder no mercado corporativo, especialmente em setores como finanças, saúde e governo.
+
+Oferece recursos avançados de segurança, alta disponibilidade e suporte a grandes volumes de dados.
+
+Utilizado em sistemas críticos, como ERP, CRM e aplicativos financeiros.
+
+Vantagens:
+
+Alta confiabilidade e desempenho.
+
+Amplo suporte técnico e comunidade ativa.
+
+Compatibilidade com diversas plataformas e linguagens de programação.
+
+Desvantagens:
+
+Licenciamento e custos operacionais elevados.
+
+Curva de aprendizado mais acentuada para iniciantes.​
+
+
+MySQL
+Tipo: Relacional (RDBMS)
+
+Desenvolvedor: Originalmente criado por suecos e um finlandês; atualmente mantido pela Oracle Corporation.
+
+Características:
+
+Utiliza a linguagem SQL como interface.
+
+Disponível em versões gratuitas e comerciais.
+
+Suporta Unicode, índices de texto completo, replicação, backup em tempo real, GIS e OLAP.
+
+Casos de uso:
+
+Amplamente utilizado em aplicações web e sistemas de gerenciamento de conteúdo.
+
+Empresas como NASA, Google, eBay e Facebook utilizam o MySQL em suas operações.
