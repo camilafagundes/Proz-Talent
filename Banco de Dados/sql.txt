@@ -1,0 +1,14 @@
+🔸 1. Criar o banco de dados chamado ESCOLA
+    CREATE DATABASE ESCOLA;
+    USE ESCOLA;
+
+🔸 2. Criar a tabela ALUNO com os atributos e chave primária
+
+CREATE TABLE ALUNO (
+    ID INT PRIMARY KEY,
+    Nome VARCHAR(100),
+    Matricula INT,
+    Email VARCHAR(100),
+    Endereco VARCHAR(100),
+    Telefone VARCHAR(20)
+);

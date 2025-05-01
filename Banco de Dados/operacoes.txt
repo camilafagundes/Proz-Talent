@@ -1,0 +1,27 @@
+1. SELECT – Alunos aprovados (NOTA > 7,0):
+
+    σ NOTA > 7.0 (ALUNO)
+
+2. SELECT – Alunos do 1º ano com nota ≥ 8,0:
+
+    σ SÉRIE = '1º ano' ∧ NOTA >= 8.0 (ALUNO)
+
+3. PROJECT – Apenas nomes e notas dos alunos:
+
+    π P.NOME, NOTA (ALUNO)
+
+ 4. Criar tabela PROFESSOR(P.NOME, U.NOME)
+
+5. Criar tabela ALUNO(P.NOME, U.NOME)
+
+6. UNIÃO – ALUNO ∪ PROFESSOR
+
+    ALUNO(P.NOME, U.NOME) ∪ PROFESSOR(P.NOME, U.NOME)
+
+7. INTERSECÇÃO – ALUNO ∩ PROFESSOR
+
+    ALUNO(P.NOME, U.NOME) ∩ PROFESSOR(P.NOME, U.NOME)
+
+8. DIFERENÇA – ALUNO - PROFESSOR
+
+    ALUNO(P.NOME, U.NOME) − PROFESSOR(P.NOME, U.NOME)
