@@ -1,0 +1,46 @@
+-- Criando o banco de dados e tabelas para exemplo
+CREATE DATABASE IF NOT EXISTS vendas;
+USE vendas;
+
+-- Tabela de produtos
+CREATE TABLE IF NOT EXISTS produtos (
+    id_produto INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL
+);
+
+-- Tabela de vendas
+CREATE TABLE IF NOT EXISTS vendas (
+    id_venda INT PRIMARY KEY AUTO_INCREMENT,
+    id_produto INT,
+    quantidade INT NOT NULL,
+    data_venda DATE NOT NULL,
+    FOREIGN KEY (id_produto) REFERENCES produtos(id_produto)
+);
+
+-- Procedure para gerar relatório diário de produtos vendidos
+DELIMITER //
+CREATE PROCEDURE RelatorioVendasDiarias()
+BEGIN
+    SELECT 
+        data_venda,
+        SUM(quantidade) AS total_produtos_vendidos
+    FROM vendas
+    GROUP BY data_venda
+    ORDER BY data_venda DESC;
+END //
+DELIMITER ;
+
+-- Exemplo de inserção de dados para teste
+INSERT INTO produtos (nome, preco) VALUES 
+('Notebook', 3500.00),
+('Smartphone', 1200.00);
+
+INSERT INTO vendas (id_produto, quantidade, data_venda) VALUES 
+(1, 2, '2025-06-15'),
+(2, 5, '2025-06-15'),
+(1, 1, '2025-06-14'),
+(2, 3, '2025-06-14');
+
+-- Chamada do procedure para gerar o relatório
+CALL RelatorioVendasDiarias();

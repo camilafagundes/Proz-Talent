@@ -1,0 +1,62 @@
+-- Criando o banco de dados
+CREATE DATABASE biblioteca;
+USE biblioteca;
+
+-- Tabela para armazenar informações dos livros
+CREATE TABLE livros (
+    id_livro INT PRIMARY KEY AUTO_INCREMENT,
+    titulo VARCHAR(100) NOT NULL,
+    autor VARCHAR(50) NOT NULL,
+    ano_publicacao INT,
+    isbn VARCHAR(13) UNIQUE,
+    quantidade INT NOT NULL DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabela para armazenar informações dos usuários
+CREATE TABLE usuarios (
+    id_usuario INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    telefone VARCHAR(15),
+    data_cadastro DATE DEFAULT CURRENT_DATE
+);
+
+-- Tabela para registrar empréstimos
+CREATE TABLE emprestimos (
+    id_emprestimo INT PRIMARY KEY AUTO_INCREMENT,
+    id_livro INT,
+    id_usuario INT,
+    data_emprestimo DATE NOT NULL,
+    data_devolucao DATE,
+    status ENUM('emprestado', 'devolvido') DEFAULT 'emprestado',
+    FOREIGN KEY (id_livro) REFERENCES livros(id_livro),
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
+
+-- Tabela para log de inserções de livros
+CREATE TABLE log_livros (
+    id_log INT PRIMARY KEY AUTO_INCREMENT,
+    id_livro INT,
+    titulo VARCHAR(100),
+    data_insercao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Trigger para registrar inserções na tabela livros
+DELIMITER //
+CREATE TRIGGER after_insert_livro
+AFTER INSERT ON livros
+FOR EACH ROW
+BEGIN
+    INSERT INTO log_livros (id_livro, titulo, data_insercao)
+    VALUES (NEW.id_livro, NEW.titulo, CURRENT_TIMESTAMP);
+END;
+//
+DELIMITER ;
+
+-- Exemplo de inserção para testar o trigger
+INSERT INTO livros (titulo, autor, ano_publicacao, isbn, quantidade)
+VALUES ('O Senhor dos Anéis', 'J.R.R. Tolkien', 1954, '9780544003415', 5);
+
+-- Consulta para verificar o log
+SELECT * FROM log_livros;

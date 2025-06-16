@@ -1,0 +1,90 @@
+-- Criando o banco de dados
+CREATE DATABASE livraria;
+
+-- Usando o banco de dados
+USE livraria;
+
+-- Criando a tabela Autores
+CREATE TABLE Autores (
+    autor_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    nacionalidade VARCHAR(50),
+    data_nascimento DATE
+);
+
+-- Criando a tabela Livros
+CREATE TABLE Livros (
+    livro_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    titulo VARCHAR(150) NOT NULL,
+    autor_id INTEGER,
+    ano_publicacao INTEGER,
+    preco DECIMAL(10, 2),
+    FOREIGN KEY (autor_id) REFERENCES Autores(autor_id)
+);
+
+-- Criando a tabela Clientes
+CREATE TABLE Clientes (
+    cliente_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    telefone VARCHAR(15)
+);
+
+-- Criando a tabela Vendas
+CREATE TABLE Vendas (
+    venda_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cliente_id INTEGER,
+    livro_id INTEGER,
+    data_venda DATE NOT NULL,
+    quantidade INTEGER NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES Clientes(cliente_id),
+    FOREIGN KEY (livro_id) REFERENCES Livros(livro_id)
+);
+
+-- Inserindo dados na tabela Autores
+INSERT INTO Autores (nome, nacionalidade, data_nascimento) VALUES
+('Machado de Assis', 'Brasileira', '1839-06-21'),
+('J.K. Rowling', 'Britânica', '1965-07-31'),
+('George Orwell', 'Britânica', '1903-06-25');
+
+-- Inserindo dados na tabela Livros
+INSERT INTO Livros (titulo, autor_id, ano_publicacao, preco) VALUES
+('Dom Casmurro', 1, 1899, 39.90),
+('Harry Potter e a Pedra Filosofal', 2, 1997, 59.90),
+('1984', 3, 1949, 45.00),
+('Memórias Póstumas de Brás Cubas', 1, 1881, 35.50);
+
+-- Inserindo dados na tabela Clientes
+INSERT INTO Clientes (nome, email, telefone) VALUES
+('Ana Silva', 'ana.silva@email.com', '11987654321'),
+('Carlos Souza', 'carlos.souza@email.com', '21976543210'),
+('Maria Oliveira', 'maria.oliveira@email.com', '31965432109');
+
+-- Inserindo dados na tabela Vendas
+INSERT INTO Vendas (cliente_id, livro_id, data_venda, quantidade) VALUES
+(1, 1, '2025-06-01', 2),
+(2, 2, '2025-06-02', 1),
+(3, 3, '2025-06-03', 1),
+(1, 4, '2025-06-04', 1);
+
+-- Consulta 1: Listar todos os livros com seus autores usando INNER JOIN
+SELECT Livros.titulo, Autores.nome AS autor, Livros.ano_publicacao, Livros.preco
+FROM Livros
+INNER JOIN Autores ON Livros.autor_id = Autores.autor_id;
+
+-- Consulta 2: Listar todas as vendas com informações de clientes e livros usando INNER JOIN
+SELECT Vendas.venda_id, Clientes.nome AS cliente, Livros.titulo AS livro, Vendas.data_venda, Vendas.quantidade
+FROM Vendas
+INNER JOIN Clientes ON Vendas.cliente_id = Clientes.cliente_id
+INNER JOIN Livros ON Vendas.livro_id = Livros.livro_id;
+
+-- Consulta 3: Listar livros e autores, incluindo livros sem autor (usando LEFT JOIN)
+SELECT Livros.titulo, Autores.nome AS autor
+FROM Livros
+LEFT JOIN Autores ON Livros.autor_id = Autores.autor_id;
+
+-- Consulta 4: Listar clientes e suas compras, incluindo clientes sem compras (usando LEFT JOIN)
+SELECT Clientes.nome, Vendas.venda_id, Livros.titulo
+FROM Clientes
+LEFT JOIN Vendas ON Clientes.cliente_id = Vendas.cliente_id
+LEFT JOIN Livros ON Vendas.livro_id = Livros.livro_id;
